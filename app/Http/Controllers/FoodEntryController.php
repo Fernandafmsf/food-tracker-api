@@ -2,21 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\FoodEntryRequest;
 use App\Models\FoodEntry;
 use Illuminate\Http\Request;
 
 class FoodEntryController extends Controller
 {
-    public function store(Request $request)
+    public function store(FoodEntryRequest $request)
     {
-
-        //Ajustar requested dps pra ficar em arquivo separado
-        $validated = $request->validate([
-            'nome' => 'required|string',
-            'gramas' => 'required|numeric',
-            'calorias_por_grama' => 'required|numeric',
-            'criado_em' => 'required|date',
-        ]);
+        $validated = $request->validated();
 
         $entrada = FoodEntry::create($validated);
 
